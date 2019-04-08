@@ -1,28 +1,63 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { connect } from "react-redux";
+
 import './App.css';
+import 'font-awesome/css/font-awesome.min.css';
+import Footer from './Components/Footer';
+import Home from './Components/Home';
+import UserInterface from './Components/UserUi/UserInterface';
+import Admin from './Components/AdminUi/Admin';
+
+
+
+
 
 class App extends Component {
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+    if (this.props.isLogged === true && this.props.role === "User") {
+      return (
+        <React.Fragment>
+          <UserInterface />
+        </React.Fragment>
+      )
+    }
+    if (this.props.isLogged === true && this.props.role === "Admin") {
+      return (
+        <React.Fragment>
+          <Admin />
+        </React.Fragment>
+      )
+    }
+    else {
+      return (
+          <div className="App">
+         <Home/>
+            <Footer />
+          </div>
+       
+         
+     
+
+      );
+    }
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  debugger;
+  return { isLogged: state.isLogged, role: state.role };
+
+}
+
+const mapDispatchToProps = (dispatch) => {
+  let obj = {
+    dispatch: (data) => {
+      dispatch(data);
+    }
+  }
+  return obj;
+}
+
+const app = connect(mapStateToProps, mapDispatchToProps)(App);
+export default app;
+

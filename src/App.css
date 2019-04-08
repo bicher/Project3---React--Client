@@ -1,33 +1,145 @@
-.App {
-  text-align: center;
+body {
+  color: #2c2c2c;
+  font-size: 14px;
+  font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.admin, .UserInterface {
+  background-color: gray;
   display: flex;
-  flex-direction: column;
+  min-height: 100vh;
+  padding: 0;
+  color: #FFFFFF;
+  position: relative;
+}
+  
+.page-header {
+  background-image: url('./Images/background2.jpg');
+  background-size: cover;
+  background-position: center center;
+  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  min-height: 100vh;
+  max-height: 100%;
+  padding: 0;
+  color: #FFFFFF;
+  position: relative;
+}
+
+.page-header .title {
+  margin-bottom: 15px; 
+}
+
+.description {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.btn-round {
+  border-width: 1px !important;
+  border-radius: 30px !important;
+  padding-right: 23px !important;
+  padding-left: 23px !important;
+}
+
+#linkB {
+color: white;
+text-decoration: underline;
+}
+
+.card {
+  background-color: rgba(229, 228, 255, 0.4)!important;
+  background-size: cover;
+}
+
+.md-form{
+  position: relative;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+.form-control {
+  margin-left: 30px !important;
+  width: 90%!important;
+  background-color: transparent !important;
+  color: white!important;
+  border: none!important;
+  border-bottom: 1px solid #ced4da !important;
+}
+
+::placeholder { 
+  color: black !important;
+  opacity: 1; 
+}
+
+
+.prefix {
+  float: left;
+  top: .25rem;
+  font-size: 1.75rem !important;
+}
+
+.footer {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  color: #fff;
+}
+
+.footer .copyright {
+  font-size: 0.8571em;
+  line-height: 1.8; 
+
+}
+.vacations img {
+    max-width: 100%;
+    max-height: 100%;
+    
+
+}
+.card-image {
+  float: left;
+  width: 16rem!important;
+  height: 20rem!important;
+  margin: 10px 10px 5px 5px;
+  
+}
+
+.nav-link{
+  color: rgb(255,255,255, 0.8)
+}
+.nav-link:hover{
+  color: rgb(255,255,255, 1)
+}
+
+.nav-link.disabled {
+color: white!important;
+}
+.price{
+  font-size: 28px;
+  font-weight: 700;
+  margin-top: 55px;
+}
+.top-right {
+  float: right!important;
+}
+.top-left {
+  float: left!important;
+}
+.modal input {
+  background-color: inherit;
+  border:0;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.fa-edit, .fa-times {
+  color: black;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+.fa {
+  font-size: 18px;
+}
+
+@media screen and (max-width: 420px) {
+  .vacation{
+    width: 95%!important;
   }
 }
