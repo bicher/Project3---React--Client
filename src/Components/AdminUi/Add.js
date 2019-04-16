@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
+import { AddVacation } from '../../State/actions';
 
 class Add extends Component {
-
     state = {
         details: '',
         destination: '',
@@ -13,7 +14,7 @@ class Add extends Component {
 
     render() {
         return (
-            <div classNameName="Add">
+            <div className="Add">
                 <div className="md-form">
                     <input onChange={this.handleChange.bind(this)} name="details" placeholder="Description" className="form-control" />
                 </div>
@@ -43,15 +44,19 @@ class Add extends Component {
         this.setState({ [ev.target.name]: ev.target.value })
     }
 
-    async add() {
-        await fetch('http://localhost:3000/addvacation', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(this.state)
-        });
+    add() {
+        this.props.addVacation(this.state);
     }
 }
-export default Add;
+
+const mapDispatchToProps = dispatch => {
+    return {
+        addVacation: (state) => {
+            return dispatch(AddVacation(state));
+        }
+    };
+};
+
+const add = connect(null, mapDispatchToProps)(Add)
+
+export default add;

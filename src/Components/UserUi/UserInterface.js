@@ -8,7 +8,7 @@ import Navbar from '../Navbar';
 
 class UserInterface extends Component {
     state = {
-        follower: '',
+        followers: '',
         favorite: []
     }
 

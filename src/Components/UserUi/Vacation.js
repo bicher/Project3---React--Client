@@ -1,34 +1,32 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
+import { DeletePost, Followers, Unfollow } from '../../State/actions';
 import ModalEdit from '../AdminUi/ModalEdit';
 
 
-
-
-
 class Vacation extends Component {
+
     state = {
-        buttonClick: true,
-        follow: this.props.v.followers
-        
+        buttonClick: false
     }
+
     render() {
         if (this.props.role === "Admin") {
-            debugger;
             return (
                 <div className="vacations">
                     <div className="card card-image" style={{ backgroundImage: `url(${this.props.v.image})` }}>
                         <div>
-                            <span className="fa fa-times top-left" onClick={this.deletePost.bind(this)}></span><br />
-                            <ModalEdit forModal={this.props.v}/>
+                            <span className="fa fa-times top-right" onClick={this.deleteVacation.bind(this)}></span><br />
+                            <ModalEdit forModal={this.props.v} />
                         </div>
                         <div className="text-white pt-3 pb-3 px-4">
                             <div>
                                 <h3 className="card-title pt-1 text-center"><strong>{this.props.v.destination}</strong></h3>
-                                <p className="text-center"><i className="fa fa-plane-departure"></i>{this.props.v.startdate}
-                                    <br /><i className="fa fa-plane-arrival"></i>{this.props.v.enddate}</p>
+                                <p className="text-center">{this.props.v.startdate}
+                                    <br />
+                                    {this.props.v.enddate}</p>
                                 <p className="text-left">{this.props.v.details}</p>
-                                <p className="text-center">{this.props.v.price}<i className="fa fa-usd"></i></p>
-                                
+                                <p className="price text-center">{this.props.v.price}<i className="fa fa-usd"></i></p>
                             </div>
                         </div>
                     </div>
@@ -37,41 +35,54 @@ class Vacation extends Component {
             )
         }
         else {
-            debugger;
             return (
                 <div className="vacations">
                     <div className="card card-image" style={{ backgroundImage: `url(${this.props.v.image})` }}>
                         <div className="text-white pt-3 pb-3 px-4">
                             <div>
                                 <h3 className="card-title pt-1 text-center"><strong>{this.props.v.destination}</strong></h3>
-                                <p className="text-center"><i className="fa fa-plane-departure"></i>{this.props.v.startdate}
-                                    <br /><i className="fa fa-plane-arrival"></i>{this.props.v.enddate}</p>
+                                <p className="text-center">{this.props.v.startdate}
+                                    <br />{this.props.v.enddate}</p>
                                 <p className="text-left">{this.props.v.details}</p>
-                                <p className="text-center">{this.props.v.price}<i className="fa fa-usd"></i></p>
-                                <button onClick={this.follow.bind(this)}>{this.state.buttonClick ? 'Follow' : 'Unfollow'} ({this.state.follow ? +1 : this.state.follow  })</button>
+                                <p className="price text-center">{this.props.v.price}<i className="fa fa-usd"></i></p>
+                                <button onClick={this.follow.bind(this)}>{this.state.buttonClick ? 'Unfollow' : 'Follow'}</button>
                             </div>
                         </div>
-
                     </div>
                 </div >
             );
         }
     }
+
     follow() {
         this.setState(function (prevState) {
             return { buttonClick: !prevState.buttonClick };
         });
-        this.setState(function (prevState) {
-            return { follow: !prevState.follow };
-        });
-    }
-   async deletePost(){
-       debugger;
-        let res = await fetch('http://localhost:3000/delete?id='+this.props.v.id)
-        let data = await res.json();
        
+        if (!this.state.buttonClick) {
+            this.props.dispatchVacaion(Followers(this.props.v.id));
+        }
+        else {
+            this.props.dispatchVacaion(Unfollow(this.props.v.id));
+        }
     }
-    
+
+    deleteVacation() {
+        this.props.dispatchVacaion(DeletePost(this.props.v.id));
+    }
 }
 
-export default Vacation;
+const mapStateToProps = (state) => {
+    return { msg: state.msg };
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        dispatchVacaion: (data) => {
+            dispatch(data);
+        }
+    }
+}
+
+const vacation = connect(mapStateToProps, mapDispatchToProps)(Vacation);
+export default vacation;

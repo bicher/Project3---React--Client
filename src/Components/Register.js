@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
+import { RegisterRequest } from '../State/actions'
 import { Link } from 'react-router-dom';
 
 
@@ -63,18 +65,24 @@ class Register extends Component {
       alert('Password required!')
     }
     else {
-      await fetch('http://localhost:3000/register', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(this.state)
-      });
-      alert('Welcome!');
+      this.props.registerRequest(RegisterRequest(this.state));
+      alert('Register Successful');
       this.props.history.push("/login");
+      
+    }
+  }
+}
+const mapStateToProps = (state) => {
+  return { msg: state.msg };
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    registerRequest: function (data) {
+      return dispatch(data);
     }
   }
 }
 
-export default Register;
+const register = connect(mapStateToProps, mapDispatchToProps)(Register)
+export default register;

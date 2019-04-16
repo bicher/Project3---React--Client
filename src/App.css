@@ -116,7 +116,6 @@ color: white!important;
 .price{
   font-size: 28px;
   font-weight: 700;
-  margin-top: 55px;
 }
 .top-right {
   float: right!important;
@@ -132,6 +131,10 @@ color: white!important;
 
 .fa-edit, .fa-times {
   color: black;
+}
+.fa-edit:hover, .fa-times:hover {
+  font-size: 22px;
+  color: red;
 }
 
 .fa {

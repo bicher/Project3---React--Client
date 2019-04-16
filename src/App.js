@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-
 import './App.css';
 import 'font-awesome/css/font-awesome.min.css';
 import Footer from './Components/Footer';
 import Home from './Components/Home';
 import UserInterface from './Components/UserUi/UserInterface';
 import Admin from './Components/AdminUi/Admin';
-
-
-
 
 
 class App extends Component {
@@ -34,17 +30,12 @@ class App extends Component {
          <Home/>
             <Footer />
           </div>
-       
-         
-     
-
       );
     }
   }
 }
 
 const mapStateToProps = (state) => {
-  debugger;
   return { isLogged: state.isLogged, role: state.role };
 
 }

@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
+import  { LogOut }  from '../State/actions'
 import { Link } from 'react-router-dom';
 
 class Navbar extends Component {
@@ -11,20 +13,22 @@ class Navbar extends Component {
                             aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
                         </button>
-
                         <div className="collapse navbar-collapse" id="navbarToggler">
                             <ul className="navbar-nav mr-auto smooth-scroll">
                                 <li className="nav-item">
                                     <span className="nav-link disabled">Hello {this.props.name}</span>
                                 </li>
                                 <li className="nav-item">
+                                    <Link to="/" className="nav-link">Vacations</Link>
+                                </li>
+                                <li className="nav-item">
                                     <Link to="/add" className="nav-link">Add New Vacation</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to="/" className="nav-link">Reports</Link>
+                                    <Link to="/graph" className="nav-link">Reports</Link>
                                 </li>
                                 <li className="nav-item"><Link>
-                                    <span className="nav-link" onClick={this.logout.bind(this)}><i class="fa fa-power-off"></i> Logout</span></Link>
+                                    <span className="nav-link" onClick={this.logoutBtn.bind(this)}><i className="fa fa-power-off"></i> Logout</span></Link>
                                 </li>
                             </ul>
                         </div>
@@ -41,7 +45,7 @@ class Navbar extends Component {
                                 <span className="nav-link disabled">Hello {this.props.name}</span>
                             </li>
                             <li className="nav-item">
-                                <Link><span className="nav-link" onClick={this.logout.bind(this)}><i class="fa fa-power-off"></i> Logout</span></Link>
+                                <Link><span className="nav-link" onClick={this.logoutBtn.bind(this)}><i className="fa fa-power-off"></i> Logout</span></Link>
                             </li>
                         </ul>
                     </div>
@@ -50,10 +54,25 @@ class Navbar extends Component {
         }
     }
 
-    async logout() {
-        let res = await fetch('http://localhost:3000/logout')
-        let data = await res.json();
+    logoutBtn() {
+        this.props.logOut();
+        
     }
 }
 
-export default Navbar;
+const mapStateToProps = state => {
+    return {
+      isLogged: state.isLogged,
+    };
+  };
+
+  const mapDispatchToProps = dispatch => {
+    return {
+        logOut: () => {
+            dispatch(LogOut());
+        }
+    }
+}
+
+const navbar = connect(mapStateToProps, mapDispatchToProps)(Navbar);
+export default navbar;
