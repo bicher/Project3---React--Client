@@ -100,11 +100,11 @@ export const Unfollow = (val) => {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(val)
+            body: JSON.stringify({val})
         });
         let data = await res.json();
         dispatch({
-            type: "FOLLOW",
+            type: "UNFOLLOW",
             data: data
         })
     }

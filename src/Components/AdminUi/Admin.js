@@ -35,7 +35,7 @@ class Admin extends Component {
 
 
 const mapStateToProps = state => {
-    return { vacations: state.vacations, firstname: state.firstname, role: state.role };
+    return { vacations: state.vacations, firstname: state.firstname, role: state.role, favorites: state.favorites };
 };
 
 const mapDispatchToProps = dispatch => {

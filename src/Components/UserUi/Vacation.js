@@ -45,7 +45,7 @@ class Vacation extends Component {
                                     <br />{this.props.v.enddate}</p>
                                 <p className="text-left">{this.props.v.details}</p>
                                 <p className="price text-center">{this.props.v.price}<i className="fa fa-usd"></i></p>
-                                <button onClick={this.follow.bind(this)}>{this.state.buttonClick ? 'Unfollow' : 'Follow'}</button>
+                                <button id="followBtn" onClick={this.follow.bind(this)}>{this.state.buttonClick ? 'Unfollow' : 'Follow'}</button>
                             </div>
                         </div>
                     </div>
@@ -60,9 +60,11 @@ class Vacation extends Component {
         });
        
         if (!this.state.buttonClick) {
+            // document.getElementById("followBtn").style.backgroundColor = "green";
             this.props.dispatchVacaion(Followers(this.props.v.id));
         }
         else {
+            // document.getElementById("followBtn").style.backgroundColor = "grey";
             this.props.dispatchVacaion(Unfollow(this.props.v.id));
         }
     }

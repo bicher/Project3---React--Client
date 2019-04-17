@@ -52,6 +52,7 @@ const vacationReducer = (state = initialState, action) => {
             newState = Object.assign({}, state);
             newState.msg = action.data.msg;
             newState.vacations = action.data.allVacations;
+            
             return newState;
 
         case "UNFOLLOW":

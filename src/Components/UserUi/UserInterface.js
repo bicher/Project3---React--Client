@@ -31,6 +31,7 @@ class UserInterface extends Component {
 }
 const mapStateToProps = state => {
     return { vacations: state.vacations, firstname: state.firstname, role: state.role };
+    
 };
 
 const mapDispatchToProps = dispatch => {
