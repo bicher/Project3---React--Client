@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
+import { LoginRequest } from './State/actions';
 import './App.css';
 import 'font-awesome/css/font-awesome.min.css';
 import Footer from './Components/Footer';
@@ -9,6 +10,11 @@ import Admin from './Components/AdminUi/Admin';
 
 
 class App extends Component {
+
+  componentDidMount(){
+    this.props.dispatch(LoginRequest());
+  }
+
   render() {
     if (this.props.isLogged === true && this.props.role === "User") {
       return (
@@ -36,7 +42,7 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { isLogged: state.isLogged, role: state.role };
+  return { isLogged: state.isLogged, role: state.role, msg: state.msg };
 
 }
 

@@ -3,6 +3,9 @@ import { connect } from "react-redux";
 import Footer from '../Footer';
 import Vacation from './Vacation'
 import Navbar from '../Navbar';
+import io from 'socket.io-client';
+import { getVacations } from '../../State/actions';
+const socket = io('http://localhost:8888');
 
 
 
@@ -11,7 +14,11 @@ class UserInterface extends Component {
         followers: '',
         favorite: []
     }
-
+componentDidMount(){
+socket.on('vacationsChange', (msg)=> {
+    this.props.loadVacations(getVacations());
+})
+}
     render() {
         return (
             <React.Fragment>
@@ -19,7 +26,7 @@ class UserInterface extends Component {
                 <div className="UserInterface">
                     <div className="col-xl-8 col-lg-11 col-md-11 col-sm-1 mx-auto mt-lg-5">
                         <div className="container text-center">
-                            <h1>New Vacations</h1>
+                        <h1 className="mt-3">New Vacations</h1>
                         </div>
                         {this.props.vacations.map(v => <Vacation key={v.id} v={v} />)}
                     </div>
@@ -36,8 +43,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        loadVacations: () => {
-            return dispatch();
+        loadVacations: (data) => {
+            return dispatch(data);
         }
     }
 };

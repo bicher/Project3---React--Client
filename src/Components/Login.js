@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 class Login extends Component {
   state = {
     username: '',
-    password: ''
+    password: '',
   }
 
   render() {
@@ -58,7 +58,8 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return { isLogged: state.isLogged, role: state.role };
+  debugger;
+  return { isLogged: state.isLogged, role: state.role, msg: state.msg };
 }
 
 const mapDispatchToProps = dispatch => {

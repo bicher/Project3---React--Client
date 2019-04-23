@@ -23,8 +23,8 @@ export const LogOut = () => {
         dispatch({
             type: "LOGOUT",
             data: data
-        }) 
-  };
+        })
+    };
 }
 
 export const RegisterRequest = (val) => {
@@ -82,7 +82,7 @@ export const Followers = (val) => {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({val})
+            body: JSON.stringify({ val })
         });
         let data = await res.json();
         dispatch({
@@ -100,7 +100,7 @@ export const Unfollow = (val) => {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({val})
+            body: JSON.stringify({ val })
         });
         let data = await res.json();
         dispatch({
@@ -126,5 +126,37 @@ export const EditVacation = (val) => {
             data: data
         })
     }
+}
+
+export const ChartGraph = (createChart = null) => {
+    return async function (dispatch) {
+        let res = await fetch('http://localhost:3000/login', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
+        let data = await res.json();
+        dispatch({
+            type: "CHART",
+            data: data
+        });
+
+        if (createChart != null) {
+            createChart();
+        }
+    };
+}
+
+export const getVacations = () => {
+    return async (dispatch) => {
+        let res = await fetch('http://localhost:3000/vacations');
+        let data = await res.json();
+        dispatch({
+            type: "VACATIONS_CHANGE",
+            data: data
+        }) 
+  };
 }
 

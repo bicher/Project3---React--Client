@@ -20,7 +20,7 @@ class Admin extends Component {
             <div className="admin">
               <div className="col-xl-8 col-lg-11 col-md-11 col-sm-1 mx-auto mt-lg-5">
                 <div className="container text-center">
-                  <h1>Admin Panel</h1>
+                  <h1 className="mt-3">Admin Panel</h1>
                 </div>
                 <Route exact path="/" component={AdminVac} />
                 <Route path="/add" component={Add} />
@@ -35,7 +35,7 @@ class Admin extends Component {
 
 
 const mapStateToProps = state => {
-    return { vacations: state.vacations, firstname: state.firstname, role: state.role, favorites: state.favorites };
+    return { vacations: state.vacations, firstname: state.firstname, role: state.role };
 };
 
 const mapDispatchToProps = dispatch => {

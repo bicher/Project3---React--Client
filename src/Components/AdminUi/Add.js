@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { AddVacation } from '../../State/actions';
+import { AddVacation, getVacations } from '../../State/actions';
+import io from 'socket.io-client';
+const socket = io('http://localhost:8888');
 
 class Add extends Component {
     state = {
@@ -12,6 +14,12 @@ class Add extends Component {
         price: ''
     }
 
+    componentDidMount(){
+        socket.on('vacationChange', (msg)=> {
+            this.props.loadVacations(getVacations());
+        })
+        }
+
     render() {
         return (
             <div className="Add">
@@ -22,19 +30,19 @@ class Add extends Component {
                     <input onChange={this.handleChange.bind(this)} name="destination" placeholder="destination" className="form-control" />
                 </div>
                 <div className="md-form">
-                    <input type="file" onChange={this.handleChange.bind(this)} name="image" className="form-control" />
+                    <input type="file" onChange={this.handleChange.bind(this)} name="image" className="form-control adding" />
                 </div>
                 <div className="md-form">
-                    <input onChange={this.handleChange.bind(this)} name="startdate" type="date" className="form-control" />
+                    <input onChange={this.handleChange.bind(this)} name="startdate" type="date" className="form-control adding" />
                 </div>
                 <div className="md-form">
-                    <input onChange={this.handleChange.bind(this)} name="enddate" type="date" className="form-control" />
+                    <input onChange={this.handleChange.bind(this)} name="enddate" type="date" className="form-control adding" />
                 </div>
                 <div className="md-form">
-                    <input onChange={this.handleChange.bind(this)} name="price" type="number" className="form-control" />
+                    <input onChange={this.handleChange.bind(this)} name="price" type="number" placeholder="Price in USD" className="form-control adding" />
                 </div>
                 <div className="text-center">
-                    <button onClick={this.add.bind(this)}>Add Vacation</button>
+                    <button className="btn btn-primary" onClick={this.add.bind(this)}>Add Vacation</button>
 
                 </div>
             </div>

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { EditVacation } from '../../State/actions'
+import { EditVacation, getVacations } from '../../State/actions'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import io from 'socket.io-client';
+const socket = io('http://localhost:8888');
 
 class ModalEdit extends Component {
   constructor(props) {
@@ -16,7 +18,11 @@ class ModalEdit extends Component {
       details: ''
     };
   }
-
+  componentDidMount() {
+    socket.on('vacationsChange', (msg) => {
+      this.props.editVacation(getVacations());
+    })
+  }
   render() {
     return (
       <div className="modalEdit">
@@ -26,14 +32,16 @@ class ModalEdit extends Component {
           <ModalBody>
             <div className="vacations">
               <div className="card card-image" style={{ backgroundImage: `url(${this.props.forModal.image})` }}>
-                <div className="col-3 text-white pt-3 pb-3 px-4">
-                  <div>
-                    <input onChange={this.handleChange.bind(this)} name="destination" className="card-title pt-1 text-center" placeholder={this.props.forModal.destination} />
-                    <i className="fa fa-plane-departure"><input onChange={this.handleChange.bind(this)} name="startdate" className="text-center" placeholder={this.props.forModal.startdate} /></i>
-                    <br /><i className="fa fa-plane-arrival"><input className="text-center" onChange={this.handleChange.bind(this)} name="enddate" placeholder={this.props.forModal.enddate} /></i>
-                    <input className="text-left" onChange={this.handleChange.bind(this)} name="details" placeholder={this.props.forModal.details} />
-                    <input className="text-center" onChange={this.handleChange.bind(this)} name="price" type="number" placeholder={this.props.forModal.price} /><i className="fa fa-usd"></i>
+                <div className="overlay">
+                  <div className="col-3 text-white pt-3 pb-3 px-4">
+                    <div>
+                      <input onChange={this.handleChange.bind(this)} name="destination" className="card-title pt-1 text-center" placeholder={this.props.forModal.destination} />
+                      <i className="fa fa-plane-departure"><input onChange={this.handleChange.bind(this)} name="startdate" className="text-center" placeholder={this.props.forModal.startdate} /></i>
+                      <br /><i className="fa fa-plane-arrival"><input className="text-center" onChange={this.handleChange.bind(this)} name="enddate" placeholder={this.props.forModal.enddate} /></i>
+                      <input className="text-left" onChange={this.handleChange.bind(this)} name="details" placeholder={this.props.forModal.details} />
+                      <input className="text-center" onChange={this.handleChange.bind(this)} name="price" type="number" placeholder={this.props.forModal.price} /><i className="fa fa-usd"></i>
 
+                    </div>
                   </div>
                 </div>
               </div>
@@ -60,6 +68,7 @@ class ModalEdit extends Component {
   saveVacation() {
     debugger;
     this.props.editVacation(EditVacation(this.state))
+    this.toggle();
   }
 }
 

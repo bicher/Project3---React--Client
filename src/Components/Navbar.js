@@ -1,23 +1,37 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import  { LogOut }  from '../State/actions'
+import { LogOut } from '../State/actions'
 import { Link } from 'react-router-dom';
 
 class Navbar extends Component {
+    constructor(props) {
+        super(props);
+        this.toggleNavbar = this.toggleNavbar.bind(this);
+        this.state = {
+            collapsed: true,
+        };
+    }
+    toggleNavbar() {
+        this.setState({
+            collapsed: !this.state.collapsed,
+        });
+    }
+
     render() {
+        const collapsed = this.state.collapsed;
+        const classOne = collapsed ? 'collapse navbar-collapse' : 'collapse navbar-collapse show';
+        const classTwo = collapsed ? 'navbar-toggler navbar-toggler-right collapsed' : 'navbar-toggler navbar-toggler-right';
         if (this.props.role === "Admin") {
             return (
-                <nav className="navbar navbar-expand-lg navbar-absolute fixed-top ">
+                <nav className="navbar navbar-expand-lg navbar-absolute fixed-top navbar-light">
                     <div className="container">
-                        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
-                            aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                        <button onClick={this.toggleNavbar} className={`${classTwo}`} type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+
                             <span className="navbar-toggler-icon"></span>
                         </button>
-                        <div className="collapse navbar-collapse" id="navbarToggler">
+                        <span class="navbar-brand" href="#">Hello {this.props.name}</span>
+                        <div className={`${classOne}`} id="navbarResponsive">
                             <ul className="navbar-nav mr-auto smooth-scroll">
-                                <li className="nav-item">
-                                    <span className="nav-link disabled">Hello {this.props.name}</span>
-                                </li>
                                 <li className="nav-item">
                                     <Link to="/" className="nav-link">Vacations</Link>
                                 </li>
@@ -40,10 +54,9 @@ class Navbar extends Component {
             return (
                 <nav className="navbar navbar-expand-lg navbar-absolute fixed-top">
                     <div className="container">
+                    <span class="navbar-brand" href="#">Hello {this.props.name}</span>
                         <ul className="navbar-nav mr-auto smooth-scroll">
-                            <li className="nav-item">
-                                <span className="nav-link disabled">Hello {this.props.name}</span>
-                            </li>
+                           
                             <li className="nav-item">
                                 <Link><span className="nav-link" onClick={this.logoutBtn.bind(this)}><i className="fa fa-power-off"></i> Logout</span></Link>
                             </li>
@@ -56,17 +69,17 @@ class Navbar extends Component {
 
     logoutBtn() {
         this.props.logOut();
-        
+
     }
 }
 
 const mapStateToProps = state => {
     return {
-      isLogged: state.isLogged,
+        isLogged: state.isLogged,
     };
-  };
+};
 
-  const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = dispatch => {
     return {
         logOut: () => {
             dispatch(LogOut());
