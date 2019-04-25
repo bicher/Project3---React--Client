@@ -17,7 +17,7 @@ class Register extends Component {
       <div className="col-xl-5 col-lg-6 col-md-10 col-sm-12 mx-auto mt-lg-5">
         <div className="card">
           <div className="card-body">
-            <h3>Register Page</h3>
+            <h3>Register</h3>
             <div className="md-form">
               <input onChange={this.handleChange.bind(this)} name="firstname" type="text" placeholder="First Name" className="form-control" />
             </div>

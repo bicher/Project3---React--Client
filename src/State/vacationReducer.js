@@ -32,9 +32,11 @@ const vacationReducer = (state = initialState, action) => {
             return newState;
 
         case "ADD":
+        debugger;
             newState = Object.assign({}, state);
-            newState.msg = action.data.msg;
+            newState.msg = action.data.msg; 
             newState.vacations = action.data.allVacations;
+            debugger;
             return newState;
 
         case "EDIT":

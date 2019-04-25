@@ -57,6 +57,7 @@ export const DeletePost = (val) => {
 }
 
 export const AddVacation = (val) => {
+    debugger
     return async (dispatch) => {
         let res = await fetch('http://localhost:3000/addvacation', {
             method: 'POST',
@@ -66,7 +67,9 @@ export const AddVacation = (val) => {
             },
             body: JSON.stringify(val)
         });
+        debugger;
         let data = await res.json();
+        debugger;
         dispatch({
             type: "ADD",
             data: data

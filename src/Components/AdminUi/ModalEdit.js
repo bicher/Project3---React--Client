@@ -18,11 +18,13 @@ class ModalEdit extends Component {
       details: ''
     };
   }
+
   componentDidMount() {
     socket.on('vacationsChange', (msg) => {
       this.props.editVacation(getVacations());
     })
   }
+
   render() {
     return (
       <div className="modalEdit">
@@ -40,7 +42,6 @@ class ModalEdit extends Component {
                       <br /><i className="fa fa-plane-arrival"><input className="text-center" onChange={this.handleChange.bind(this)} name="enddate" placeholder={this.props.forModal.enddate} /></i>
                       <input className="text-left" onChange={this.handleChange.bind(this)} name="details" placeholder={this.props.forModal.details} />
                       <input className="text-center" onChange={this.handleChange.bind(this)} name="price" type="number" placeholder={this.props.forModal.price} /><i className="fa fa-usd"></i>
-
                     </div>
                   </div>
                 </div>
@@ -66,7 +67,6 @@ class ModalEdit extends Component {
   }
 
   saveVacation() {
-    debugger;
     this.props.editVacation(EditVacation(this.state))
     this.toggle();
   }

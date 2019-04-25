@@ -6,9 +6,9 @@ class AdminVac extends Component {
 
     render() {
         return (
-           <div>
-{this.props.vacations.map(v => <Vacation key={v.id} v={v} role={this.props.role} />)}  
-                        </div>
+            <div>
+                {this.props.vacations.map(v => <Vacation key={v.id} v={v} role={this.props.role} />)}
+            </div>
         )
     }
 }

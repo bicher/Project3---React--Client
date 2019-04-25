@@ -27,7 +27,6 @@ class Vacation extends Component {
                                 <span className="fa fa-times top-right" onClick={this.deleteVacation.bind(this)}></span><br />
                                 <ModalEdit forModal={this.props.v} />
                             </div>
-
                             <div className="text-white pt-3 pb-3 px-4">
                                 <div>
                                     <h3 className="card-title pt-1 text-center"><strong>{this.props.v.destination}</strong></h3>
@@ -42,22 +41,21 @@ class Vacation extends Component {
                         </div>
                     </div>
                 </div >
-
             )
         }
+
         else {
             return (
                 <div className="vacations">
                     <div className="card card-image" style={{ backgroundImage: `url(${this.props.v.image})` }}>
                         <div className="overlay">
                             <div className="text-white pt-3 pb-3 px-4">
-
                                 <h3 className="card-title pt-1 text-center"><strong>{this.props.v.destination}</strong></h3>
                                 <p className="text-center">{this.props.v.startdate}
                                     <br />{this.props.v.enddate}</p>
                                 <p className="text-left">{this.props.v.details}</p>
                                 <p className="price text-center">{this.props.v.price}<i className="fa fa-usd"></i></p>
-                                <button id="followBtn" onClick={this.follow.bind(this)}>{this.state.buttonClick ? 'Unfollow' : 'Follow'}</button>
+                                <button className="btn btn-success" id="followBtn" onClick={this.follow.bind(this)}>{this.state.buttonClick ? 'Unfollow' : 'Follow'}</button>
                             </div>
                         </div>
                     </div>

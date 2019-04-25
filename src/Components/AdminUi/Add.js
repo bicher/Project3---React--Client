@@ -14,11 +14,11 @@ class Add extends Component {
         price: ''
     }
 
-    componentDidMount(){
-        socket.on('vacationChange', (msg)=> {
+    componentDidMount() {
+        socket.on('vacationChange', (msg) => {
             this.props.loadVacations(getVacations());
         })
-        }
+    }
 
     render() {
         return (
@@ -49,12 +49,22 @@ class Add extends Component {
         );
     }
     handleChange(ev) {
+        if (ev.target.name == "image") {
+            let file = ev.target.files[0];
+            let reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => {
+                console.log(reader.result);
+                this.setState({ image: reader.result });
+            }
+        }
         this.setState({ [ev.target.name]: ev.target.value })
     }
 
     add() {
         this.props.addVacation(this.state);
     }
+
 }
 
 const mapDispatchToProps = dispatch => {
