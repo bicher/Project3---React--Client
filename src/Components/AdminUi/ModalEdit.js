@@ -36,12 +36,12 @@ class ModalEdit extends Component {
               <div className="card card-image" style={{ backgroundImage: `url(${this.props.forModal.image})` }}>
                 <div className="overlay">
                   <div className="col-3 text-white pt-3 pb-3 px-4">
-                    <div>
-                      <input onChange={this.handleChange.bind(this)} name="destination" className="card-title pt-1 text-center" placeholder={this.props.forModal.destination} />
-                      <i className="fa fa-plane-departure"><input onChange={this.handleChange.bind(this)} name="startdate" className="text-center" placeholder={this.props.forModal.startdate} /></i>
-                      <br /><i className="fa fa-plane-arrival"><input className="text-center" onChange={this.handleChange.bind(this)} name="enddate" placeholder={this.props.forModal.enddate} /></i>
-                      <input className="text-left" onChange={this.handleChange.bind(this)} name="details" placeholder={this.props.forModal.details} />
-                      <input className="text-center" onChange={this.handleChange.bind(this)} name="price" type="number" placeholder={this.props.forModal.price} /><i className="fa fa-usd"></i>
+                    <div style={{ width: "16rem", height: "20rem" }}>
+                    Destination:<input onChange={this.handleChange.bind(this)} name="destination" className="card-title pt-1 text-center" placeholder={this.props.forModal.destination} />
+                    Start Date:<input onChange={this.handleChange.bind(this)} name="startdate" className="text-center" placeholder={this.props.forModal.startdate} />
+                      <br />End Date:<input className="text-center" onChange={this.handleChange.bind(this)} name="enddate" placeholder={this.props.forModal.enddate} />
+                      Details:<input className="text-left" onChange={this.handleChange.bind(this)} name="details" placeholder={this.props.forModal.details} />
+                      Price:<input className="text-center" onChange={this.handleChange.bind(this)} name="price" type="number" placeholder={this.props.forModal.price} /><i className="fa fa-usd"></i>
                     </div>
                   </div>
                 </div>

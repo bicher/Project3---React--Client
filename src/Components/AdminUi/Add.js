@@ -24,10 +24,10 @@ class Add extends Component {
         return (
             <div className="Add">
                 <div className="md-form">
-                    <input onChange={this.handleChange.bind(this)} name="details" placeholder="Description" className="form-control" />
+                    <input onChange={this.handleChange.bind(this)} name="details" placeholder="Description" className="form-control adding" />
                 </div>
                 <div className="md-form">
-                    <input onChange={this.handleChange.bind(this)} name="destination" placeholder="destination" className="form-control" />
+                    <input onChange={this.handleChange.bind(this)} name="destination" placeholder="destination" className="form-control adding" />
                 </div>
                 <div className="md-form">
                     <input type="file" onChange={this.handleChange.bind(this)} name="image" className="form-control adding" />
